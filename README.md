@@ -25,3 +25,7 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 ```
+
+## Test API
+### copy bearer token from .env.example for swagger doc
+### use swagger doc to test endpoints [swagger docs](http://localhost:3000/api/#/).

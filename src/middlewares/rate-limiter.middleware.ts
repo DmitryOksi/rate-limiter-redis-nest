@@ -35,12 +35,16 @@ export class RateLimiterMiddleware implements NestMiddleware {
       : req.ip;
 
     const maxNumberOfUserRequestsInRateLimit: number = bearerHeader
-      ? this.configService.get('MAX_NUMBER_OF_PRIVATE_REQUESTS_IN_RATE_LIMIT')
-      : this.configService.get('MAX_NUMBER_OF_PUBLIC_REQUESTS_IN_RATE_LIMIT');
+      ? this.configService.get<number>(
+          'MAX_NUMBER_OF_PRIVATE_REQUESTS_IN_RATE_LIMIT',
+        )
+      : this.configService.get<number>(
+          'MAX_NUMBER_OF_PUBLIC_REQUESTS_IN_RATE_LIMIT',
+        );
 
     const record: any = await this.cacheManager.get(cacheKey);
     const currentRequestTime: moment.Moment = moment();
-    const TIME_RATE_LIMIT_IN_SECONDS: number = this.configService.get(
+    const TIME_RATE_LIMIT_IN_SECONDS: number = this.configService.get<number>(
       'TIME_RATE_LIMIT_IN_SECONDS',
     );
 
