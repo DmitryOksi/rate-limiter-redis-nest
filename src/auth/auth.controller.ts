@@ -6,10 +6,14 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  //jwt example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJkem1pdHJ5LmFrc2lvbmF1QGlubm93aXNlLWdyb3VwLmNvbSIsImlhdCI6MX0.UrApZ95z4Ay3UK5_95zQB_BYCbMJKObAWkds4M4FNxA
   @UseGuards(JwtAuthGuard)
-  @Get('profile')
+  @Get('private-endpoint')
   getProfile(@Request() req) {
     return req.user;
+  }
+
+  @Get('public-endpoint')
+  getRedisCash() {
+    return 'hello world';
   }
 }
