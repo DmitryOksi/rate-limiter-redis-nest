@@ -28,9 +28,9 @@ export class RateLimiterMiddleware implements NestMiddleware {
   }
 
   async use(req: Request, res: Response, next: NextFunction) {
-    const bearerHeader = req.headers['authorization'];
+    const bearerHeader: string = req.headers['authorization'];
 
-    const cacheKey = bearerHeader
+    const cacheKey: string = bearerHeader
       ? this.getTokenFromBearerHeader(bearerHeader)
       : req.ip;
 
@@ -63,7 +63,7 @@ export class RateLimiterMiddleware implements NestMiddleware {
       currentRequestTime.unix() - requestLog.timestamp;
 
     if (requestLog.counter >= maxNumberOfUserRequestsInRateLimit) {
-      const allowedTimeOfNextUserRequest = moment()
+      const allowedTimeOfNextUserRequest: string = moment()
         .add(TIME_RATE_LIMIT_IN_SECONDS - requestLogExistenceTime, 'seconds')
         .toLocaleString();
 

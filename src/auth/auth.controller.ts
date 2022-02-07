@@ -1,6 +1,5 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from './jwt-auth.guard';
-import { AuthService } from './auth.service';
 import {
   ApiBearerAuth,
   ApiOkResponse,
@@ -15,7 +14,7 @@ import { UserDto } from './dto/user.dto';
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
   @ApiOperation({ summary: 'Get token payload' })
   @ApiOkResponse({
